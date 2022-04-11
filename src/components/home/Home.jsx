@@ -6,7 +6,7 @@ import { Header } from '../header/Header';
 
 export const Home = () => {
   return (
-    <div className='main'>
+    <div className='home'>
       <Header />
       <div className='home-container'>
         <div className='home-content'>
