@@ -199,7 +199,7 @@ export const MovieCards = ({ movies, activeMovies }) => {
           >
             <Tooltip title='Info'>
               <IconButton aria-label='info' onClick={handleClickOpen}>
-                <HelpIcon style={{ fontSize: 25, color: '#3d7aff' }} />
+                <HelpIcon style={{ fontSize: 40, display: 'flex', marginTop: '30px', color: '#3d7aff' }} />
               </IconButton>
             </Tooltip>
           </div>
@@ -226,8 +226,8 @@ export const MovieCards = ({ movies, activeMovies }) => {
                 fontSize: size1,
                 fontWeight: '400',
                 letterSpacing: '10px',
-                marginTop: '-30px',
-                paddingLeft: '10px',
+                paddingTop: '30px',
+                marginLeft: '120px'
               }}
             >
               The Best Movies
@@ -266,7 +266,6 @@ export const MovieCards = ({ movies, activeMovies }) => {
           ))}
         </Grid>
       </Grow>
-      <p>chuyeenr</p>
     </div>
   );
 };

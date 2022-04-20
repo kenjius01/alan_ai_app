@@ -1,6 +1,7 @@
 .container {
   padding: 5% 5%;
   width: 100%;
+  background-color: #000000;
   
 }
 .main-container {
@@ -76,4 +77,5 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  margin-left: 100px
 }

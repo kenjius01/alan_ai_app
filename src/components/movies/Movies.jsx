@@ -1,5 +1,5 @@
 // import alanBtn from '@alan-ai/alan-sdk-web';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { MovieCards } from '../movieCards/MovieCards';
 import {Modal} from '../modal/Modal'
 import './movie.css';
@@ -9,6 +9,8 @@ export const Movies = ({
   setOpen,
   setPlaying,
   videoKey,
+  isOpen,
+  playing,
   movies,
   activeMovies,
 }) => {
@@ -19,6 +21,8 @@ export const Movies = ({
           setOpen={setOpen}
           setPlaying={setPlaying}
           videoKey={videoKey}
+          isOpen={isOpen}
+          playing={playing}
         >
         </Modal>
       )}
