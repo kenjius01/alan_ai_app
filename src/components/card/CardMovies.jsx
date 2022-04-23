@@ -40,57 +40,45 @@ export const CardMovies = ({
   }, [i, activeMovies, elRefs]);
 
   return (
-    <div>
-      <Card
-        ref={elRefs[activeMovies]}
-        className={classNames(
-          'card',
-          activeMovies === i + 1 ? 'activeCard' : null
-        )}
+    <Card
+      ref={elRefs[activeMovies]}
+      className={classNames(
+        'card',
+        activeMovies === i + 1 ? 'activeCard' : null
+      )}
+    >
+      <CardActionArea
+        href={'https://www.themoviedb.org/movie/' + id}
+        target='_blank'
       >
-        <CardActionArea
+        <CardMedia
+          className='media'
+          
+          image={'http://image.tmdb.org/t/p/w500' + poster_path}
+        />
+        <Typography className={'title'} gutterBottom variant='h5'>
+          {original_title}
+        </Typography>
+        <div className='detail'>
+          <Typography variant='body2' color='textSecondary' component='h3'>
+            <b>Release Date:</b> {new Date(release_date).toDateString()}
+          </Typography>
+          <Typography variant='body2' color='textSecondary' component='h2'>
+            <b>Rating:</b> {vote_average}/10 ({vote_count} votes)
+          </Typography>
+        </div>
+      </CardActionArea>
+      <CardActions className='cardActions'>
+        <Button
+          size='small'
+          color='primary'
           href={'https://www.themoviedb.org/movie/' + id}
           target='_blank'
         >
-          <CardMedia
-            className='media'
-            component='img'
-            image={'http://image.tmdb.org/t/p/w500' + poster_path}
-          />
-          <Typography className={'title'} gutterBottom variant='h6'>
-            {original_title}
-          </Typography>
-          <div className='detail'>
-            <Typography
-              className={'title'}
-              variant='body2'
-              color='textSecondary'
-              component='h3'
-            >
-              <b>Release Date:</b> {new Date(release_date).toDateString()}
-            </Typography>
-            <Typography
-              className={'title'}
-              variant='body2'
-              color='textSecondary'
-              component='h2'
-            >
-              <b>Rating:</b> {vote_average}/10 ({vote_count} votes)
-            </Typography>
-          </div>
-        </CardActionArea>
-        <CardActions className='cardActions'>
-          <Button
-            size='small'
-            color='primary'
-            href={'https://www.themoviedb.org/movie/' + id}
-            target='_blank'
-          >
-            Know More
-          </Button>
-          <Typography variant='h5'>{i + 1}</Typography>
-        </CardActions>
-      </Card>
-    </div>
+          Know More
+        </Button>
+        <Typography variant='h5'>{i + 1}</Typography>
+      </CardActions>
+    </Card>
   );
 };

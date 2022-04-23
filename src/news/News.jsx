@@ -1,5 +1,3 @@
-import './movieCards.css';
-import React, { useEffect, useState } from 'react';
 import {
   Avatar,
   Chip,
@@ -13,28 +11,28 @@ import {
   Slide,
   Tooltip,
 } from '@mui/material';
-import HelpIcon from '@mui/icons-material/Help';
-import { CardMovies } from '../card/CardMovies';
+import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import React, { useEffect, useState } from 'react';
+import './news.css';
+import { NewsCard } from '../components/newsCard/NewsCard';
+// import { Header } from '../components/header/Header';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />;
 });
 
-export const MovieCards = ({ movies, activeMovies }) => {
+export const News = ({ articles, activeArticles }) => {
   const [open, setOpen] = useState(false);
-  const [width, setWidth] = React.useState(window.innerWidth);
-  const [size, setSize] = React.useState('');
-  const [size1, setSize1] = React.useState('');
-  // console.log(movies);
+  const [width, setWidth] = useState(window.innerWidth);
+  const [size, setSize] = useState('');
+  const [size1, setSize1] = useState('');
 
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
-
   useEffect(() => {
     const handleWindowResize = () => setWidth(window.innerWidth);
     window.addEventListener('resize', handleWindowResize);
@@ -51,19 +49,19 @@ export const MovieCards = ({ movies, activeMovies }) => {
   }
 
   useEffect(() => {
-    
-  function handleResize() {
-    if (view === 'mobile') {
-      setSize('4rem');
-      setSize1('1rem');
-    } else if (view === 'tablet') {
-      setSize('5rem');
-      setSize1('1.5rem');
-    } else if (view === 'laptop') {
-      setSize('8rem');
-      setSize1('2rem');
-    }
-  }
+    const handleResize = () => {
+      if (view === 'mobile') {
+        setSize('4rem');
+        setSize1('1rem');
+      } else if (view === 'tablet') {
+        setSize('5rem');
+        setSize1('1.5rem');
+      } else if (view === 'laptop') {
+        setSize('8rem');
+        setSize1('2rem');
+      }
+    };
+    handleResize();
     handleResize();
 
     window.addEventListener('resize', handleResize);
@@ -72,11 +70,15 @@ export const MovieCards = ({ movies, activeMovies }) => {
       window.removeEventListener('resize', handleResize);
     };
   }, [view]);
-  useEffect(() => console.log('length', movies.length), [movies.length]);
 
-  if (!movies.length) {
+  if (!articles.length) {
     return (
-      <div className='main-container'>
+      <div className='news-container'>
+        <img
+          src='https://codetipi.com/zeen/img/zeen-mock-1440.png'
+          alt=''
+          className='news-background'
+        />
         <div className='content'>
           <Dialog
             open={open}
@@ -107,10 +109,10 @@ export const MovieCards = ({ movies, activeMovies }) => {
                       <Avatar
                         style={{ backgroundColor: '#fff', color: '#00ab55' }}
                       >
-                        W
+                        L
                       </Avatar>
                     }
-                    label='What are the best movies today?'
+                    label='Give me the latest news'
                     clickable
                     style={{
                       margin: '5px',
@@ -124,10 +126,10 @@ export const MovieCards = ({ movies, activeMovies }) => {
                       <Avatar
                         style={{ backgroundColor: '#fff', color: '#7635dc' }}
                       >
-                        T
+                        C
                       </Avatar>
                     }
-                    label='Tell me about {movie_name}'
+                    label='Give me the latest {Category:Technology,Music,Science,...} news'
                     clickable
                     style={{
                       margin: '5px',
@@ -141,14 +143,31 @@ export const MovieCards = ({ movies, activeMovies }) => {
                       <Avatar
                         style={{ backgroundColor: '#fff', color: '#1ccaff' }}
                       >
-                        P
+                        T
                       </Avatar>
                     }
-                    label='Play trailer for {movie_name}'
+                    label="What's up with {terms: Bitcoin, PlayStation 5, Smartphones, Donald Trump...}"
                     clickable
                     style={{
                       margin: '5px',
                       backgroundColor: '#1ccaff',
+                      color: '#fff',
+                    }}
+                  />
+                  <Chip
+                    size='medium'
+                    avatar={
+                      <Avatar
+                        style={{ backgroundColor: '#fff', color: '#ff00ff' }}
+                      >
+                        S
+                      </Avatar>
+                    }
+                    label='Give me the news from {source: CNN, ABC news,...}'
+                    clickable
+                    style={{
+                      margin: '5px',
+                      backgroundColor: '#ff00ff',
                       color: '#fff',
                     }}
                   />
@@ -161,7 +180,7 @@ export const MovieCards = ({ movies, activeMovies }) => {
                         O
                       </Avatar>
                     }
-                    label='Open movie number {movie_no.}'
+                    label='Open the article number {news number}'
                     clickable
                     style={{
                       margin: '5px',
@@ -178,7 +197,7 @@ export const MovieCards = ({ movies, activeMovies }) => {
                         G
                       </Avatar>
                     }
-                    label='Go Back to movies page'
+                    label='Go Back'
                     clickable
                     style={{
                       margin: '5px',
@@ -200,15 +219,21 @@ export const MovieCards = ({ movies, activeMovies }) => {
           >
             <Tooltip title='Info'>
               <IconButton aria-label='command' onClick={handleClickOpen}>
-                <HelpIcon style={{ fontSize: 40, display: 'flex', marginTop: '30px', color: '#3d7aff' }} />
+                <LightbulbIcon
+                  style={{
+                    fontSize: 40,
+                    display: 'flex',
+                    marginTop: '30px',
+                    color: '#33cc33',
+                  }}
+                />
               </IconButton>
             </Tooltip>
           </div>
-
           <div>
             {size && (
               <span
-                className='discover'
+                className='news-headline'
                 style={{
                   display: 'inline-block',
                   fontWeight: '500',
@@ -216,22 +241,23 @@ export const MovieCards = ({ movies, activeMovies }) => {
                   letterSpacing: '3px',
                 }}
               >
-                Discover.
+                Newspaper
               </span>
             )}
           </div>
           {size1 && (
             <span
+              className='news-des'
               style={{
                 color: 'white',
                 fontSize: size1,
                 fontWeight: '400',
                 letterSpacing: '10px',
                 paddingTop: '30px',
-                marginLeft: '120px'
+                marginLeft: '120px',
               }}
             >
-              The Best Movies
+              Time to read all news over the world
             </span>
           )}
         </div>
@@ -240,15 +266,16 @@ export const MovieCards = ({ movies, activeMovies }) => {
   }
 
   return (
-
+    <div>
+        
       <Grow in>
         <Grid
-          className='container'
+          className='card-container'
           container
           alignItems='stretch'
           spacing={3}
         >
-          {movies.map((movie, i) => (
+          {articles.map((article, i) => (
             <Grid
               key={i}
               item
@@ -258,15 +285,15 @@ export const MovieCards = ({ movies, activeMovies }) => {
               lg={3}
               style={{ display: 'flex' }}
             >
-              <CardMovies
-                movie={movie}
-                activeMovies={activeMovies}
-                i={i}
+              <NewsCard
+                article={article}
+                activeArticles={activeArticles}
+                index={i}
               />
             </Grid>
           ))}
         </Grid>
       </Grow>
-  
+    </div>
   );
 };

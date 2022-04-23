@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import alanBtn from '@alan-ai/alan-sdk-web';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Home } from './components/home/Home';
 import { Movies } from './components/movies/Movies';
 import wordToNumbers from 'word-to-numbers';
+import { News } from './news/News';
 
 //import {Switch, BrowserRouter as Router, Route, Link} from 'react-router-dom'
 
@@ -11,9 +12,9 @@ const alanKey =
   '431ef72d5586821a72d702e857ce70972e956eca572e1d8b807a3e2338fdd0dc/stage';
 
 function App() {
-  let navigate = useNavigate();
-  // const [tab, setTab] = useState('home');
-  // const [alanBtn, setalanBtn] = useState();
+  const navigate = useRef(useNavigate());
+  const [newsArticles, setNewsArticles] = useState([]);
+  const [activeArticles, setActiveArticles] = useState(0);
   const [movies, setMovies] = useState([]);
   const [activeMovies, setActiveMovies] = useState(0);
   const [videos, setVideos] = useState([]);
@@ -24,12 +25,12 @@ function App() {
   useEffect(() => {
     alanBtn({
       key: alanKey,
-      onCommand: ({ command, results, number, video }) => {
+      onCommand: ({ command, results, number, video, articles, newsNum }) => {
         if (command === 'movies') {
-          navigate('/movies');
+          navigate.current('/movies');
           // setTab('movies');
         } else if (command === 'home') {
-          navigate('/');
+          navigate.current('/');
           // setTab('home');
         } else if (command === 'showMovie') {
           setMovies(results);
@@ -47,34 +48,9 @@ function App() {
               'https://www.themoviedb.org/movie/' + movie.id,
               '_blank'
             );
-            alanBtn().playText('Opening....');
+            alanBtn().playText(`Opening the movie number ${num}....`);
           }
         } else if (command === 'play') {
-          // const loadVideo = async () => {
-          //   try {
-          //     const response = await fetch(
-          //       'https://api.themoviedb.org/3/movie/' + video.id +'/videos?api_key=c805fa1cad05662c12f0c25c8214f775&language=en-US'
-          //     );
-          //     let jsonData = await response.json();
-          //     // console.log(jsonData.results.length);
-
-          //     if (jsonData.results.length <= 0) {
-          //       console.log('bye');
-          //       alanBtn.playText(
-          //         'Sorry no trailer available for ' + video.original_title
-          //       );
-          //     } else {
-          //       console.log('data available');
-          //       setVideos(jsonData);
-          //       setOpen(true);
-          //       setPlaying(true);
-          //       alanBtn.playText('Playing trailer for ' + video.original_title);
-          //     }
-          //   } catch (e) {
-          //     // Some fetch error
-          //     console.log(e);
-          //   }
-          // };
           fetch(
             'https://api.themoviedb.org/3/movie/' +
               video.id +
@@ -84,17 +60,36 @@ function App() {
             .then((data) => {
               console.log(data);
               if (data.results.length <= 0) {
-                alanBtn.playText(
+                alanBtn().playText(
                   'Sorry no trailer available for ' + video.original_title
                 );
               } else {
                 setVideos(data);
                 setOpen(true);
                 setPlaying(true);
-                alanBtn.playText('Playing trailer for ' + video.original_title);
+                alanBtn().playText('Playing trailer for ' + video.original_title);
               }
             })
-            .catch(err=>console.log(err))
+            .catch((err) => console.log(err));
+        }
+        // News
+        else if (command === 'news') {
+          navigate.current('/news');
+        } else if (command === 'newHeadlines') {
+          setNewsArticles(articles);
+          setActiveArticles(0);
+        } else if (command === 'highlight') {
+          setActiveArticles((pre) => pre + 1);
+        } else if (command === 'open') {
+          const parseNum = newsNum.length > 2 ? wordToNumbers(newsNum, {fuzzy: true}):newsNum
+          const article = articles[parseNum - 1]
+          if(parseNum > 20 ) {
+            alanBtn().playText('Please try that again.')
+
+          } else {
+            window.open(article.url, '_blank')
+            alanBtn().playText(`Opening article number ${parseNum}....`)
+          }
         }
       },
     });
@@ -124,6 +119,12 @@ function App() {
               movies={movies}
               activeMovies={activeMovies}
             />
+          }
+        />
+        <Route
+          path='/news'
+          element={
+            <News articles={newsArticles} activeArticles={activeArticles} />
           }
         />
       </Routes>
