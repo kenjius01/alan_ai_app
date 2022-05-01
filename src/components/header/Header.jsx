@@ -14,11 +14,11 @@ export const Header = () => {
         </Link>
         <div className="header-menu">
             <ul className="header-list">
-                <li className="header-item">Platform</li>
-                <li className="header-item">Integrations</li>
-                <li className="header-item">Company</li>
-                <li className="header-item">Docs</li>
-                <li className="header-item">Entertaiment</li>
+                <li className="header-item"><a  href="https://alan.app/platform" target='_blank' rel="noreferrer">Platform</a></li>
+                <li className="header-item"><a  href="https://alan.app/docs/client-api/web/web-api/" target='_blank' rel="noreferrer">Integrations</a></li>
+                <li className="header-item"><a  href="https://alan.app/about-us" target='_blank' rel="noreferrer">Company</a></li>
+                <li className="header-item"><a  href="https://alan.app/docs/" target='_blank' rel="noreferrer">Docs</a></li>
+                <li className="header-item"><a  href="https://alan.app" target='_blank' rel="noreferrer">Entertainment</a></li>
             </ul>
         </div>
       </div>

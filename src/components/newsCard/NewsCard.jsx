@@ -9,7 +9,7 @@ export const NewsCard = ({
   index,
 }) => {
   const [elRefs, setElRefs] = useState([]);
-  const scrollToRef = (ref) => window.scroll(0, ref.current.offsetTop - 50);
+  const scrollToRef = (ref) => window.scroll(0, 400);
   useEffect(() => {
     setElRefs((refs) =>
       Array(20)

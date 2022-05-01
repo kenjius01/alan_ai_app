@@ -1,14 +1,134 @@
 import './home.css';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Header } from '../header/Header';
+import {
+  Avatar,
+  Chip,
+  Dialog,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  IconButton,
+  Slide,
+  Tooltip,
+} from '@mui/material';
+import HelpIcon from '@mui/icons-material/Help';
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction='up' ref={ref} {...props} />;
+});
 
 export const Home = () => {
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
+    
     <div className='home'>
       <Header />
       <div className='home-container'>
+        <Dialog
+          open={open}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={handleClose}
+          aria-labelledby='alert-dialog-slide-title'
+          aria-describedby='alert-dialog-slide-description'
+        >
+          <DialogTitle
+            id='alert-dialog-slide-title'
+            style={{ textAlign: 'center', fontWeight: '700' }}
+          >
+            COMMANDS
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id='alert-dialog-slide-description'>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  flexWrap: 'wrap',
+                }}
+              >
+                <Chip
+                  size='medium'
+                  avatar={
+                    <Avatar
+                      style={{ backgroundColor: '#fff', color: '#00ab55' }}
+                    >
+                      M
+                    </Avatar>
+                  }
+                  label='I want to see movies/ Go to movies page.'
+                  clickable
+                  style={{
+                    margin: '5px',
+                    backgroundColor: '#00ab55',
+                    color: '#fff',
+                  }}
+                />
+                <Chip
+                  size='medium'
+                  avatar={
+                    <Avatar
+                      style={{ backgroundColor: '#fff', color: '#7635dc' }}
+                    >
+                      N
+                    </Avatar>
+                  }
+                  label='I want read some news/ Go to news page.'
+                  clickable
+                  style={{
+                    margin: '5px',
+                    backgroundColor: '#7635dc',
+                    color: '#fff',
+                  }}
+                />
+                <Chip
+                  size='medium'
+                  avatar={
+                    <Avatar
+                      style={{ backgroundColor: '#fff', color: '#1ccaff' }}
+                    >
+                      H
+                    </Avatar>
+                  }
+                  label='Go back to HomePage'
+                  clickable
+                  style={{
+                    margin: '5px',
+                    backgroundColor: '#1ccaff',
+                    color: '#fff',
+                  }}
+                />
+                
+              </div>
+            </DialogContentText>
+          </DialogContent>
+        </Dialog>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            width: '100%',
+          }}
+        >
+          <Tooltip title='Info'>
+            <IconButton aria-label='command' onClick={handleClickOpen}>
+              <HelpIcon
+                style={{ fontSize: 40, display: 'flex', color: '#3d7aff' }}
+              />
+            </IconButton>
+          </Tooltip>
+        </div>
         <div className='home-content'>
           <div className='home-intro'>
             <h1>In-app voice assistant for Entertainment!</h1>
