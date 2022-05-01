@@ -54,7 +54,7 @@ export const CardMovies = ({
         <CardMedia
           className='media'
           
-          image={'http://image.tmdb.org/t/p/w500' + poster_path}
+          image={poster_path?('http://image.tmdb.org/t/p/w500' + poster_path):'https://i.pinimg.com/originals/a1/16/72/a1167211bffbc81f616db1ef850aee2d.png'}
         />
         <Typography className={'title'} gutterBottom variant='h5'>
           {original_title}

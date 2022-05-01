@@ -32,7 +32,7 @@ export const NewsCard = ({
         )}
       >
         <CardActionArea href={url} target='_blank'>
-          <CardMedia className={'news-media'} image={urlToImage || null} />
+          <CardMedia className={'news-media'} image={urlToImage || 'https://i.pinimg.com/originals/a1/16/72/a1167211bffbc81f616db1ef850aee2d.png'} />
           <div className={'news-details'}>
             <Typography variant='body2' color='textSecondary' component='h2'>
               {new Date(publishedAt).toDateString()}
