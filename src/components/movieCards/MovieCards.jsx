@@ -122,6 +122,40 @@ export const MovieCards = ({ movies, activeMovies }) => {
                     size='medium'
                     avatar={
                       <Avatar
+                        style={{ backgroundColor: '#fff', color: '#0066ff' }}
+                      >
+                        D
+                      </Avatar>
+                    }
+                    label='`What are the best dramas (that were released |) this year?'
+                    clickable
+                    style={{
+                      margin: '5px',
+                      backgroundColor: '#0066ff',
+                      color: '#fff',
+                    }}
+                  />
+                  <Chip
+                    size='medium'
+                    avatar={
+                      <Avatar
+                        style={{ backgroundColor: '#fff', color: '#4d0000' }}
+                      >
+                        T
+                      </Avatar>
+                    }
+                    label='What is are the best movies from 2020?'
+                    clickable
+                    style={{
+                      margin: '5px',
+                      backgroundColor: '#4d0000',
+                      color: '#fff',
+                    }}
+                  />
+                  <Chip
+                    size='medium'
+                    avatar={
+                      <Avatar
                         style={{ backgroundColor: '#fff', color: '#7635dc' }}
                       >
                         T
