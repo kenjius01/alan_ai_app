@@ -144,7 +144,7 @@ export const MovieCards = ({ movies, activeMovies }) => {
                         T
                       </Avatar>
                     }
-                    label='What is are the best movies from 2020?'
+                    label='What is are the best movies from {year}?'
                     clickable
                     style={{
                       margin: '5px',
