@@ -5,6 +5,8 @@ import { Home } from './components/home/Home';
 import { Movies } from './components/movies/Movies';
 import wordToNumbers from 'word-to-numbers';
 import { News } from './news/News';
+import { Weather } from './weather/Weather';
+import constants from './constants';
 
 //import {Switch, BrowserRouter as Router, Route, Link} from 'react-router-dom'
 
@@ -16,16 +18,30 @@ function App() {
   const [newsArticles, setNewsArticles] = useState([]);
   const [activeArticles, setActiveArticles] = useState(0);
   const [movies, setMovies] = useState([]);
+  const [weatherData, setWeatherData] = useState([])
   const [activeMovies, setActiveMovies] = useState(0);
   const [videos, setVideos] = useState([]);
   const [videoKey, setVideoKey] = useState('');
   const [isOpen, setOpen] = useState(false);
   const [playing, setPlaying] = useState(false);
 
+  async function fetchWeather(place) {
+    let PLACE_URL = `${constants.BASE_URL}${constants.GET_PLACE_DATA_ENDPOINT}${place}`;
+    const placeResponse = await fetch(PLACE_URL);
+    const placeData = await placeResponse.json();
+    if (placeData.length) {
+      let weatherURL = `${constants.BASE_URL}${placeData[0].woeid}/`;
+      const weatherResponse = await fetch(weatherURL);
+      const _weatherData = await weatherResponse.json();
+      setWeatherData(_weatherData);
+    }
+  }
+
+
   useEffect(() => {
     alanBtn({
       key: alanKey,
-      onCommand: ({ command, results, number, video, articles, newsNum }) => {
+      onCommand: ({ command, results, number, video, articles, newsNum, data }) => {
         if (command === 'movies') {
           navigate.current('/movies');
           // setTab('movies');
@@ -91,6 +107,13 @@ function App() {
             alanBtn().playText(`Opening article number ${parseNum}....`)
           }
         }
+        // Weather
+        else if (command === 'weather') {
+          navigate.current('/weather')
+        }
+        else if (command === 'showWeather') {
+          fetchWeather(data);
+        }
       },
     });
   }, []);
@@ -127,6 +150,7 @@ function App() {
             <News articles={newsArticles} activeArticles={activeArticles} />
           }
         />
+        <Route path='/weather' element = {<Weather weatherData={weatherData}/>}/>
       </Routes>
     </div>
   );

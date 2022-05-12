@@ -92,6 +92,23 @@ export const Home = () => {
                     color: '#fff',
                   }}
                 />
+                 <Chip
+                  size='medium'
+                  avatar={
+                    <Avatar
+                      style={{ backgroundColor: '#fff', color: '#8d9689e6' }}
+                    >
+                      N
+                    </Avatar>
+                  }
+                  label='Go to the weather page'
+                  clickable
+                  style={{
+                    margin: '5px',
+                    backgroundColor: '#8d9689e6',
+                    color: '#fff',
+                  }}
+                />
                 <Chip
                   size='medium'
                   avatar={
