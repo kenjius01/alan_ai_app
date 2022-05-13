@@ -11,6 +11,35 @@
   background-position: center;
 }
 
+.weather-page {
+  position: fixed;
+  top: 20px;
+  left: -50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.weather-headline {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 60px;
+  letter-spacing: 3px;
+  font-style: italic;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  background: linear-gradient(to bottom, rgb(140, 203, 207) 0%, #7e853c 100%);
+  /* background-image: linear-gradient(150deg, #33ccff 30%, #66ff99 70%); */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-left: 100px;
+}
+
+.weather-des {
+  text-align: center;
+  border-radius: 12px;
+  width: 250px;
+  background-color: rgba(34, 41, 31, 0.2);
+}
 .weather {
   background: rgba(141, 150, 137, 0.9);
   color: white;

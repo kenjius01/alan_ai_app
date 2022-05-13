@@ -16,6 +16,23 @@ export const Weather = ({ weatherData }) => {
         backgroundImage: ` url('https://source.unsplash.com/1600x900/?${weatherData?.title}')`,
       }}
     >
+      <div className="weather-page">
+        <span className="weather-headline">
+          Weather page
+        </span>
+        <span
+              className='weather-des'
+              style={{
+                color: 'white',
+                fontSize: '30px',
+                fontWeight: '400',
+                letterSpacing: '4px',
+                marginLeft: '120px',
+              }}
+            >
+              Show you the weather everywhere in the world
+            </span>
+      </div>
       {weatherData.consolidated_weather && (
         <div className='weather'>
           <h2 className='weather-city'>Weather in {weatherData?.title}</h2>
@@ -53,7 +70,8 @@ export const Weather = ({ weatherData }) => {
                   {weatherData.consolidated_weather[0].wind_direction_compass}{' '}
                   {Math.round(
                     weatherData.consolidated_weather[0].wind_speed * 10
-                  ) / 10}<span style={{ fontSize: '12px' }}>km/h</span>
+                  ) / 10}
+                  <span style={{ fontSize: '12px' }}>km/h</span>
                 </span>
               </div>
               <div className='info-item'>
@@ -258,39 +276,5 @@ export const Weather = ({ weatherData }) => {
       )}
       {/* {weatherData && <div className='weather'>Hello</div>} */}
     </div>
-
-    // <div className="weather-container">
-    //     <div className="weather-main">
-    //         <img alt="hello" src={`${constants.IMG_URL}${weatherData.consolidated_weather[0].weather_state_abbr}.svg`} />
-    //         <p>
-    //             It's <span>{weatherData.consolidated_weather[0].the_temp} &#8451; </span>
-    //             predicted <span>{weatherData.consolidated_weather[0].weather_state_name}</span>
-    //         </p>
-    //     </div>
-    //     <div className="weather-header">
-    //         <span>
-    //             <strong>Place:</strong> {weatherData.title}, {weatherData.parent.title}
-    //         </span>
-    //         <span>
-    //             <strong>Timezone:</strong> {weatherData.timezone}
-    //         </span>
-    //     </div>
-    //     <div className="weather-info">
-    //         <p>
-    //            <strong> Minimum Temperature: </strong>
-    //            <span>
-    //                {weatherData.consolidated_weather[0].min_temp.toString().slice(0,5)}
-    //                &#8451;
-    //             </span>
-    //         </p>
-    //         <p>
-    //            <strong>Maximum Temperature: </strong>
-    //            <span>
-    //                {weatherData.consolidated_weather[0].max_temp.toString().slice(0,5)}
-    //                &#8451;
-    //             </span>
-    //         </p>
-    //     </div>
-    // </div>
   );
 };
