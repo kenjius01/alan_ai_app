@@ -118,7 +118,7 @@ export const Weather = ({ weatherData }) => {
               </div>
               <div className='future-img'>
                 <img
-                  src={`${constants.IMG_URL}${weatherData.consolidated_weather[1].weather_state_abbr}.svg`}
+                  src={`${constants.IMG_URL}${weatherData.consolidated_weather[0].weather_state_abbr}.svg`}
                   alt='weather-img'
                 />
               </div>
